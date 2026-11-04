@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  ffmpeg-streamer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        BUILDPLATFORM: linux/arm64
+        TARGETPLATFORM: linux/arm64
+    container_name: ffmpeg-streamer
+    network_mode: "host"
+    environment:
+      - CAMERA_URL=rtmp://local_camera_ip/bcs/channel0_ext.bcs?channel=0&stream=0&user=my_reolink_user&password=my_reolink_pass
+      - SRS_URL=rtmp://local_srs_server_ip:rtmp_port/live/livestream
+    restart: unless-stopped    
+    volumes:
+      - ./stream.sh:/stream.sh

@@ -1,0 +1,27 @@
+services:
+  fastapi:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - srs
+    env_file:
+      - .env
+    networks:
+      - streaming_network
+
+  srs:
+    image: ossrs/srs:5
+    ports:
+      - "1935:1935"
+      - "1985:1985"
+      - "8080:8080"
+      - "8000:8000/udp"
+      - "10080:10080/udp"
+    command: []
+    networks:
+      - streaming_network
+
+networks:
+  streaming_network:
+    driver: bridge

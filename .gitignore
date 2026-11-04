@@ -1,0 +1,9 @@
+.venv
+.vscode
+.vs
+__pycache__
+*.pyc
+*.pyo
+.env
+claude-code-key.txt
+*.pt
